@@ -1,4 +1,5 @@
-puts "-" * 50
+student_count = 11
+# First we print the list of students
 puts "The students of Villians Academy"
 puts "-" * 50
 puts "Dr. Hannibal Lecter"
@@ -12,7 +13,5 @@ puts "Freddy Krueger"
 puts "The Joker"
 puts "Joffery Baratheon"
 puts "Norman Bates"
-
-print "Overall, we have "
-print 11
-print " great students"
+# Finally, we print the total number of students
+puts "Overall, we have #{student_count} great students"
