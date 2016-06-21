@@ -1,17 +1,3 @@
-# students = [
-#   {name: "Dr. Hannibal Lecter", cohort: :november},
-#   {name: "Darth Vader", cohort: :november},
-#   {name: "Nurse Ratched", cohort: :november},
-#   {name: "Michael Corleone", cohort: :november},
-#   {name: "Alex Delarge", cohort: :november},
-#   {name: "The Wicked Witch Of The West", cohort: :november},
-#   {name: "Terminator", cohort: :november},
-#   {name: "Freddy Krueger", cohort: :november},
-#   {name: "The Joker", cohort: :november},
-#   {name: "Joffrey Baratheon", cohort: :november},
-#   {name: "Norman Bates", cohort: :november},
-# ]
-
 def input_students
   students = []
   puts "** To finish, just hit return twice **"
@@ -46,7 +32,15 @@ def input_students
     puts "Please enter the next students name"
     name = gets.delete("\n")
   end
-  students
+  if students.length < 1
+    puts "-" * 50
+    puts "** No students where entered **".center(50)
+    puts "-" * 50
+    puts ""
+    exit
+  else
+    students
+  end
 end
 
 def print_header
