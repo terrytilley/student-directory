@@ -16,26 +16,26 @@ def input_students
   students = []
   puts "** To finish, just hit return twice **"
   puts "Please enter the names of the students"
-  name = gets.chomp
+  name = gets.delete("\n")
   while !name.empty? do
     puts "Is \"#{name}\" correct? (y/n) "
-    spell = gets.chomp.downcase
+    spell = gets.delete("\n").downcase
     while spell == "n"
       puts "Please re-enter the name"
-      name = gets.chomp
+      name = gets.delete("\n")
       puts "Is \"#{name}\" correct? (y/n) "
-      spell = gets.chomp.downcase
+      spell = gets.delete("\n").downcase
     end
     puts "Please enter students cohort"
-    cohort = gets.chomp
+    cohort = gets.delete("\n")
     if cohort.empty?
       cohort = "Unknown".to_sym
     end
     puts "Please enter students birth country"
-    country = gets.chomp
+    country = gets.delete("\n")
     while country.empty? do
       puts "** Please enter students birth country **"
-      country = gets.chomp
+      country = gets.delete("\n")
     end
     students << {name: name, cohort: cohort, country: country}
     if students.length < 2
@@ -44,7 +44,7 @@ def input_students
       puts "Now we have #{students.count} students"
     end
     puts "Please enter the next students name"
-    name = gets.chomp
+    name = gets.delete("\n")
   end
   students
 end
