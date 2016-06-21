@@ -52,13 +52,20 @@ def print_header
 end
 
 def print(students)
-  students.each_with_index do |student, index|
-    puts "#{index+1}.\tName: #{student[:name]}\n\tCohort: #{student[:cohort]}\n\tCountry of birth: #{student[:country]}"
-    puts ""
+  cohort_sorted = students.group_by { |e| e[:cohort] }
+  cohort_sorted.each do |k,v|
+    puts "-" * 25
+    puts "Cohort #{k}"
+    puts "-" * 25
+    v.each do |student|
+      puts "Name: #{student[:name]}\nCountry of birth: #{student[:country]}"
+      puts ""
+    end
   end
 end
 
 def print_footer(names)
+  puts "-" * 25
   puts "Overall, we have #{names.count} great students"
 end
 
