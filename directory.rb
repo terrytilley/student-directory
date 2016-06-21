@@ -38,7 +38,11 @@ def input_students
       country = gets.chomp
     end
     students << {name: name, cohort: cohort, country: country}
-    puts "Now we have #{students.count} students"
+    if students.length < 2
+      puts "Now we have #{students.count} student"
+    else
+      puts "Now we have #{students.count} students"
+    end
     puts "Please enter the next students name"
     name = gets.chomp
   end
