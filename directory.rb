@@ -40,7 +40,7 @@ end
 
 def print_header
   puts "-" * 50
-  puts "The students of Villians Academy"
+  puts "The students of Makers Academy".center(50)
   puts "-" * 50
 end
 
