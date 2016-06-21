@@ -17,15 +17,15 @@ def input_students
   puts "** To finish, just hit return twice **"
   puts "Please enter the names of the students"
   name = gets.chomp
-  puts "Is \"#{name}\" correct? (y/n) "
-  spell = gets.chomp.downcase
-  while spell == "n"
-    puts "Please re-enter the name"
-    name = gets.chomp
+  while !name.empty? do
     puts "Is \"#{name}\" correct? (y/n) "
     spell = gets.chomp.downcase
-  end
-  while !name.empty? do
+    while spell == "n"
+      puts "Please re-enter the name"
+      name = gets.chomp
+      puts "Is \"#{name}\" correct? (y/n) "
+      spell = gets.chomp.downcase
+    end
     puts "Please enter students cohort"
     cohort = gets.chomp
     if cohort.empty?
@@ -52,11 +52,9 @@ def print_header
 end
 
 def print(students)
-  index = 0
-  while index < students.length
-    puts "#{index+1}.\tName: #{students[index][:name]}\n\tCohort: #{students[index][:cohort]}\n\tCountry of birth: #{students[index][:country]}"
+  students.each_with_index do |student, index|
+    puts "#{index+1}.\tName: #{student[:name]}\n\tCohort: #{student[:cohort]}\n\tCountry of birth: #{student[:country]}"
     puts ""
-    index += 1
   end
 end
 
