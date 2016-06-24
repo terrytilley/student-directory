@@ -107,18 +107,27 @@ end
 def process(selection)
   case selection
   when "1"
+    feedback_message("1")
     input_students
   when "2"
+    feedback_message("2")
     show_students
   when "3"
+    feedback_message("3")
     save_students
   when "4"
+    feedback_message("4")
     load_students
   when "9"
+    feedback_message("9")
     exit
   else
     puts "I don't know what you meant, try again"
   end
+end
+
+def feedback_message(menu_num)
+  puts "Menu #{menu_num} selected"
 end
 
 def interactive_menu
