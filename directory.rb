@@ -1,29 +1,11 @@
 @students = []
 
 def input_students
-  puts "** To finish, just hit return twice **"
-  puts "Please enter the names of the students"
-  name = STDIN.gets.chomp
+  name = get_name
   while !name.empty? do
-    puts "Is \"#{name}\" correct? (y/n) "
-    spell = STDIN.gets.chomp.downcase
-    while spell == "n"
-      puts "Please re-enter the name"
-      name = STDIN.gets.chomp
-      puts "Is \"#{name}\" correct? (y/n) "
-      spell = STDIN.gets.chomp.downcase
-    end
-    puts "Please enter students cohort"
-    cohort = STDIN.gets.chomp
-    if cohort.empty?
-      cohort = "Unknown".to_sym
-    end
-    puts "Please enter students birth country"
-    country = STDIN.gets.chomp
-    while country.empty? do
-      puts "** Please enter students birth country **"
-      country = STDIN.gets.chomp
-    end
+    name = name_spell_check(name)
+    cohort = get_cohort
+    country = get_country
     @students << {name: name, cohort: cohort, country: country}
     if @students.length < 2
       puts "Now we have #{@students.count} student"
@@ -33,6 +15,28 @@ def input_students
     puts "Please enter the next students name"
     name = STDIN.gets.chomp
   end
+  no_students
+end
+
+def get_name
+  puts "** To finish, just hit return twice **"
+  puts "Please enter the names of the students"
+  name = STDIN.gets.chomp
+end
+
+def name_spell_check(name)
+  puts "Is \"#{name}\" correct? (y/n) "
+  spell = STDIN.gets.chomp.downcase
+  while spell == "n"
+    puts "Please re-enter the name"
+    name = STDIN.gets.chomp
+    puts "Is \"#{name}\" correct? (y/n) "
+    spell = STDIN.gets.chomp.downcase
+  end
+  name
+end
+
+def no_students
   if @students.length < 1
     puts "-" * 50
     puts "** No students where entered **".center(50)
@@ -40,6 +44,25 @@ def input_students
     puts ""
     exit
   end
+end
+
+def get_cohort
+  puts "Please enter students cohort"
+  cohort = STDIN.gets.chomp
+  if cohort.empty?
+    cohort = "Unknown".to_sym
+  end
+  cohort
+end
+
+def get_country
+  puts "Please enter students birth country"
+  country = STDIN.gets.chomp
+  while country.empty? do
+    puts "** Please enter students birth country **"
+    country = STDIN.gets.chomp
+  end
+  country
 end
 
 def print_header
