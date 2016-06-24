@@ -146,22 +146,22 @@ def set_file_name
 end
 
 def save_students
-  file = File.open(set_file_name, "w")
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts(csv_line)
+  File.open(set_file_name, "w") do |f|
+    @students.each do |student|
+      student_data = [student[:name], student[:cohort]]
+      csv_line = student_data.join(",")
+      f.puts(csv_line)
+    end
   end
-  file.close
 end
 
 def load_students(filename = set_file_name)
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(",")
-    @students << {name: name, cohort: cohort.to_sym}
+  File.open(filename, "r") do |f|
+    f.readlines.each do |line|
+      name, cohort = line.chomp.split(",")
+      @students << {name: name, cohort: cohort.to_sym}
+    end
   end
-  file.close
 end
 
 def try_load_students
