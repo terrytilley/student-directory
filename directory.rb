@@ -1,3 +1,5 @@
+require "csv"
+
 @students = []
 @filename = "students.csv"
 
@@ -108,19 +110,19 @@ end
 def process(selection)
   case selection
   when "1"
-    feedback_message("1")
+    feedback_message("(1) Input the students")
     input_students
   when "2"
-    feedback_message("2")
+    feedback_message("(2) Show the students")
     show_students
   when "3"
-    feedback_message("3")
+    feedback_message("(3) Save the list")
     save_students
   when "4"
-    feedback_message("4")
+    feedback_message("(4) Load the list")
     load_students
   when "9"
-    feedback_message("9")
+    feedback_message("(9) Exit")
     exit
   else
     puts "I don't know what you meant, try again"
@@ -129,7 +131,7 @@ end
 
 def feedback_message(menu_num)
   puts "*"*25
-  puts "Menu #{menu_num} selected".center(25)
+  puts "Menu \"#{menu_num}\" selected".center(25)
   puts "*"*25
 end
 
@@ -146,21 +148,17 @@ def set_file_name
 end
 
 def save_students
-  File.open(set_file_name, "w") do |f|
+  CSV.open(set_file_name, "w") do |csv|
     @students.each do |student|
-      student_data = [student[:name], student[:cohort]]
-      csv_line = student_data.join(",")
-      f.puts(csv_line)
+      csv << [student[:name], student[:cohort], student[:country]]
     end
   end
 end
 
 def load_students(filename = set_file_name)
-  File.open(filename, "r") do |f|
-    f.readlines.each do |line|
-      name, cohort = line.chomp.split(",")
-      @students << {name: name, cohort: cohort.to_sym}
-    end
+  CSV.foreach(filename, "r") do |row|
+    name, cohort, country = row
+    @students << {name: name, cohort: cohort.to_sym, country: country}
   end
 end
 
